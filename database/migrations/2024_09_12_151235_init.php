@@ -75,7 +75,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('failed_jobs', function (Blueprint $table) {
+        Schema::create('failed_job', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
             $table->text('connection');
@@ -99,7 +99,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('job', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
             $table->longText('payload');
@@ -259,12 +259,12 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
             $table->string('username');
-            $table->enum('ROLE', ['GUEST', 'STANDARD', 'ADMIN']);
-            $table->boolean('registered');
-            $table->timestamp('registration_date');
-            $table->boolean('subscribed');
+            $table->enum('ROLE', ['GUEST', 'STANDARD', 'ADMIN'])->default('GUEST');
+            $table->boolean('registered')->default(false);
+            $table->timestamp('registration_date')->nullable();
+            $table->boolean('subscribed')->default(false);
             $table->timestampTz('last_visited')->default(now());
             $table->integer('visits')->default(1);
             $table->timestamps();
