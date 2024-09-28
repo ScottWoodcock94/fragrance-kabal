@@ -260,7 +260,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken()->nullable();
-            $table->string('username');
+            $table->string('name');
             $table->enum('role', ['GUEST', 'STANDARD', 'ADMIN'])->default('GUEST');
             $table->boolean('registered')->default(false);
             $table->timestamp('registration_date')->nullable();
