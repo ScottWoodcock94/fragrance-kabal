@@ -127,7 +127,7 @@ return new class extends Migration {
             $table->foreignId('user_id');
             $table->foreignId('payment_method_id');
             $table->timestampTz('date');
-            $table->enum('CURRENCY', ['AED', 'AUD', 'CAD', 'CHF', 'CNY', 'DKK', 'EUR', 'GBP', 'HKD', 'ILS', 'INR', 'JOD', 'JPY', 'KRW', 'KWD', 'MXN', 'NOK', 'NZD', 'OMR', 'PLN', 'QAR', 'SAR', 'SEK', 'TRY', 'TWD', 'USD', 'ZAR']);
+            $table->enum('currency', ['AED', 'AUD', 'CAD', 'CHF', 'CNY', 'DKK', 'EUR', 'GBP', 'HKD', 'ILS', 'INR', 'JOD', 'JPY', 'KRW', 'KWD', 'MXN', 'NOK', 'NZD', 'OMR', 'PLN', 'QAR', 'SAR', 'SEK', 'TRY', 'TWD', 'USD', 'ZAR']);
             $table->timestamps();
         });
 
@@ -170,7 +170,7 @@ return new class extends Migration {
         Schema::create('product', function (Blueprint $table) {
             $table->id();
             $table->foreignId('brand_id');
-            $table->enum('VOLUME', ['30ml', '40ml', '50ml', '60ml', '70ml', '75ml', '80ml', '90ml', '100ml', '118ml', '120ml', '125ml', '150ml', '160ml', '180ml', '200ml', '250ml', '500ml']);
+            $table->enum('volume', ['30ml', '40ml', '50ml', '60ml', '70ml', '75ml', '80ml', '90ml', '100ml', '118ml', '120ml', '125ml', '150ml', '160ml', '180ml', '200ml', '250ml', '500ml']);
             $table->string('size')->nullable();
             $table->integer('price');
             $table->integer('quantity');
@@ -186,11 +186,11 @@ return new class extends Migration {
             $table->string('title');
             $table->foreignId('brand_id');
             $table->foreignId('product_line_id');
-            $table->enum('CONCENTRATION', ['Eau Fraîche', 'Eau de Cologne', 'Eau de Toilette', 'Eau de Parfum', 'Parfum'])->nullable();
+            $table->enum('concentration', ['Eau Fraîche', 'Eau de Cologne', 'Eau de Toilette', 'Eau de Parfum', 'Parfum'])->nullable();
             $table->text('description')->default('Product description coming soon!');
-            $table->enum('CATEGORY', ['Aftershave Lotion', 'Body Spray', 'Body Wash', 'Diffuser', 'Fragrance', 'Giftset', 'Handsoap', 'Handwash', 'Scented Candle']);
+            $table->enum('category', ['Aftershave Lotion', 'Body Spray', 'Body Wash', 'Diffuser', 'Fragrance', 'Giftset', 'Handsoap', 'Handwash', 'Scented Candle']);
             $table->integer('release_year')->nullable();
-            $table->enum('GENDER', ['Men', 'Unisex', 'Women']);
+            $table->enum('gender', ['Men', 'Unisex', 'Women']);
             $table->integer('quantity')->nullable(); // Only a `product_group` of `category=Giftset`, utilises the `quantity` column.
             $table->boolean('availability'); // IF `quantity=0` THEN `availability=false`
             $table->string('thumbnail_image');
@@ -225,7 +225,7 @@ return new class extends Migration {
 
         Schema::create('promotion', function (Blueprint $table) {
             $table->id();
-            $table->enum('CATEGORY', ['Coupon', 'Sale']);
+            $table->enum('category', ['Coupon', 'Sale']);
             $table->string('title');
             $table->integer('discount');
             $table->timestamp('valid_from');
@@ -261,7 +261,7 @@ return new class extends Migration {
             $table->string('password');
             $table->rememberToken()->nullable();
             $table->string('username');
-            $table->enum('ROLE', ['GUEST', 'STANDARD', 'ADMIN'])->default('GUEST');
+            $table->enum('role', ['GUEST', 'STANDARD', 'ADMIN'])->default('GUEST');
             $table->boolean('registered')->default(false);
             $table->timestamp('registration_date')->nullable();
             $table->boolean('subscribed')->default(false);
