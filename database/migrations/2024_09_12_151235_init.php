@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('forename');
             $table->string('surname');
@@ -23,14 +23,14 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('address_user', function (Blueprint $table) {
+        Schema::create('address_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('address_id');
             $table->timestamps();
         });
 
-        Schema::create('brand', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('logo_svg')->nullable();
@@ -43,13 +43,13 @@ return new class extends Migration {
             $table->integer('expiration');
         });
 
-        Schema::create('cache_lock', function (Blueprint $table) {
+        Schema::create('cache_locks', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->string('owner');
             $table->integer('expiration');
         });
 
-        Schema::create('card', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
             $table->id();
             $table->string('card_holder');
             $table->string('card_number');
@@ -59,14 +59,14 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('cart', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->integer('value');
             $table->timestamps();
         });
 
-        Schema::create('cart_product', function (Blueprint $table) {
+        Schema::create('cart_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id');
             $table->foreignId('product_id');
@@ -75,7 +75,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('failed_job', function (Blueprint $table) {
+        Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
             $table->text('connection');
@@ -92,14 +92,14 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('favourites_product', function (Blueprint $table) {
+        Schema::create('favourites_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('favourites_id');
             $table->foreignId('product_id');
             $table->timestamps();
         });
 
-        Schema::create('job', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
             $table->longText('payload');
@@ -122,7 +122,7 @@ return new class extends Migration {
             $table->integer('finished_at')->nullable();
         });
 
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('payment_method_id');
@@ -131,7 +131,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id');
             $table->foreignId('product_id');
@@ -140,20 +140,20 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('order_promotion', function (Blueprint $table) {
+        Schema::create('order_promotions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id');
             $table->foreignId('promotion_id');
             $table->timestamps();
         });
 
-        Schema::create('password_reset_token', function (Blueprint $table) {
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
-        Schema::create('payment_method', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('card_id');
@@ -161,13 +161,13 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('paypal_account', function (Blueprint $table) {
+        Schema::create('paypal_accounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('payment_method_id');
             $table->timestamps();
         });
 
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('brand_id');
             $table->enum('volume', ['30ml', '40ml', '50ml', '60ml', '70ml', '75ml', '80ml', '90ml', '100ml', '118ml', '120ml', '125ml', '150ml', '160ml', '180ml', '200ml', '250ml', '500ml']);
@@ -181,9 +181,9 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('product_group', function (Blueprint $table) {
+        Schema::create('product_groups', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('titles');
             $table->foreignId('brand_id');
             $table->foreignId('product_line_id');
             $table->enum('concentration', ['Eau Fraîche', 'Eau de Cologne', 'Eau de Toilette', 'Eau de Parfum', 'Parfum'])->nullable();
@@ -197,7 +197,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('product_image', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->string('image_main');
             $table->string('image_box')->nullable();
@@ -208,7 +208,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('product_line', function (Blueprint $table) {
+        Schema::create('product_lines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
             $table->foreignId('promotion_id');
@@ -216,14 +216,14 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('product_promotion', function (Blueprint $table) {
+        Schema::create('product_promotions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('brand_id');
             $table->string('title');
             $table->timestamps();
         });
 
-        Schema::create('promotion', function (Blueprint $table) {
+        Schema::create('promotions', function (Blueprint $table) {
             $table->id();
             $table->enum('category', ['Coupon', 'Sale']);
             $table->string('title');
@@ -235,7 +235,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('review', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('product_group_id');
@@ -245,7 +245,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('session', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
@@ -254,7 +254,7 @@ return new class extends Migration {
             $table->integer('last_activity')->index();
         });
 
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -284,34 +284,34 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('address');
-        Schema::dropIfExists('address_user');
-        Schema::dropIfExists('brand');
+        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('address_users');
+        Schema::dropIfExists('brands');
         Schema::dropIfExists('cache');
-        Schema::dropIfExists('cache_lock');
-        Schema::dropIfExists('card');
-        Schema::dropIfExists('cart');
-        Schema::dropIfExists('cart_product');
-        Schema::dropIfExists('failed_job');
+        Schema::dropIfExists('cache_locks');
+        Schema::dropIfExists('cards');
+        Schema::dropIfExists('carts');
+        Schema::dropIfExists('cart_products');
+        Schema::dropIfExists('failed_jobs');
         Schema::dropIfExists('favourites');
-        Schema::dropIfExists('favourites_product');
-        Schema::dropIfExists('job');
+        Schema::dropIfExists('favourites_products');
+        Schema::dropIfExists('jobs');
         Schema::dropIfExists('job_batches');
-        Schema::dropIfExists('order');
-        Schema::dropIfExists('order_product');
-        Schema::dropIfExists('order_promotion');
-        Schema::dropIfExists('password_reset_token');
-        Schema::dropIfExists('payment_method');
-        Schema::dropIfExists('paypal_account');
-        Schema::dropIfExists('product');
-        Schema::dropIfExists('product_group');
-        Schema::dropIfExists('product_image');
-        Schema::dropIfExists('product_line');
-        Schema::dropIfExists('product_promotion');
-        Schema::dropIfExists('promotion');
-        Schema::dropIfExists('review');
-        Schema::dropIfExists('session');
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_products');
+        Schema::dropIfExists('order_promotions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('paypal_accounts');
+        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_groups');
+        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('product_lines');
+        Schema::dropIfExists('product_promotions');
+        Schema::dropIfExists('promotions');
+        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('users');
         Schema::dropIfExists('viewed_products');
     }
 };
